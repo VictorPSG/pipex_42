@@ -77,11 +77,6 @@
 // 	return (0);
 // }
 #include "pipex.h"
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <sys/wait.h>
 
 char *get_command_path(char *cmd, char **envp)
 {
@@ -90,17 +85,12 @@ char *get_command_path(char *cmd, char **envp)
     char *full_path;
     int i = 0;
 
-    while (envp[i])
-    {
-        if (ft_strncmp(envp[i], "PATH=", 5) == 0)
-            path_env = envp[i] + 5;
+    while (envp[i] && ft_strncmp(envp[i], "PATH=", 5))
         i++;
-    }
-    if (!path_env)
-        return (NULL);
-    paths = ft_split(path_env, ':');
-    if (!paths)
-        return (NULL);
+    if (!envp[i] || !(path_env = envp[i] + 5))
+		return (NULL);
+	if(!(paths = ft_split(path_env, ':')))
+		return (NULL);
     i = 0;
     while (paths[i])
     {
