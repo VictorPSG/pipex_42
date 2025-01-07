@@ -1,26 +1,27 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: victda-s <victda-s@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: victda-s <victda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 23:10:47 by victda-s          #+#    #+#             */
-/*   Updated: 2025/01/02 02:22:10 by victda-s         ###   ########.fr       */
+/*   Updated: 2025/01/06 20:47:25 by victda-s         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "pipex.h"
 
-static int create_file(char *argv[])
+static int	create_file(char *argv[])
 {
 	int	outfile;
 
 	outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-    if (outfile < 0)
-        return (perror("outfile"), 1);
+	if (outfile < 0)
+		return (perror("outfile"), 1);
 	return (outfile);
 }
+
 static int	is_valid_input(int argc, char *argv[])
 {
 	int	infile;
@@ -39,8 +40,8 @@ static int	is_valid_input(int argc, char *argv[])
 int	main(int argc, char *argv[], char *envp[])
 {
 	static int	fd[2];
-	int outfile;
-	int infile;
+	int			outfile;
+	int			infile;
 
 	outfile = create_file(argv);
 	if (is_valid_input(argc, argv) || !outfile)
