@@ -6,7 +6,7 @@
 /*   By: victda-s <victda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 23:10:47 by victda-s          #+#    #+#             */
-/*   Updated: 2025/01/08 14:44:39 by victda-s         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:53:23 by victda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ int	main(int argc, char *argv[], char *envp[])
 	if (!infile)
 		return (0);
 	outfile = create_file(argv);
-	if(!outfile)
+	if (!outfile)
 		return (0);
 	if (pipe(fd) == -1)
 		return (perror("pipe"), 1);
 	child_process_one(fd, argv, envp, infile);
 	child_process_two(fd, argv, envp, outfile);
 	close(fd[0]);
-    close(fd[1]);
+	close(fd[1]);
 	return (0);
 }

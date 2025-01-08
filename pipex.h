@@ -6,7 +6,7 @@
 /*   By: victda-s <victda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 20:59:43 by victda-s          #+#    #+#             */
-/*   Updated: 2025/01/06 22:24:50 by victda-s         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:52:48 by victda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
-# define PATH "/usr/bin/"
 
 int		child_process(int fd[2], char *argv[], char *envp[]);
 char	*get_command_path(char *cmd, char **envp);
