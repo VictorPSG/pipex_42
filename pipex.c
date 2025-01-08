@@ -6,7 +6,7 @@
 /*   By: victda-s <victda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 23:10:47 by victda-s          #+#    #+#             */
-/*   Updated: 2025/01/08 14:53:23 by victda-s         ###   ########.fr       */
+/*   Updated: 2025/01/08 17:35:10 by victda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ static int	create_file(char *argv[])
 {
 	int	outfile;
 
+	if (argv[4] == NULL)
+		return (0);
 	outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (outfile < 0)
-		return (perror("outfile"), 1);
+		return (0);
 	return (outfile);
 }
 
@@ -46,12 +48,15 @@ int	main(int argc, char *argv[], char *envp[])
 	int			outfile;
 	int			infile;
 
+	outfile = create_file(argv);
 	infile = is_valid_input(argc, argv);
 	if (!infile)
 		return (0);
-	outfile = create_file(argv);
 	if (!outfile)
+	{
+		perror("outfile");
 		return (0);
+	}
 	if (pipe(fd) == -1)
 		return (perror("pipe"), 1);
 	child_process_one(fd, argv, envp, infile);
