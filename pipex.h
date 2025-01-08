@@ -6,7 +6,7 @@
 /*   By: victda-s <victda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 20:59:43 by victda-s          #+#    #+#             */
-/*   Updated: 2025/01/08 14:52:48 by victda-s         ###   ########.fr       */
+/*   Updated: 2025/01/08 17:48:00 by victda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,9 @@
 
 # include "libft/libft.h"
 # include <fcntl.h>
-# include <stdio.h>
-# include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
 
-int		child_process(int fd[2], char *argv[], char *envp[]);
 char	*get_command_path(char *cmd, char **envp);
 int		*child_process_one(int fd[2], char *argv[], char *envp[], int infile);
 int		*child_process_two(int fd[2], char *argv[], char *envp[], int outfile);
