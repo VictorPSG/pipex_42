@@ -6,7 +6,7 @@
 /*   By: victda-s <victda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 20:30:26 by victda-s          #+#    #+#             */
-/*   Updated: 2025/01/06 21:26:32 by victda-s         ###   ########.fr       */
+/*   Updated: 2025/01/07 21:23:37 by victda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ char	*get_command_path(char *cmd, char **envp)
 	i = 0;
 	while (envp[i] && ft_strncmp(envp[i], "PATH=", 5))
 		i++;
-	if (!envp[i] || !(path_env = envp[i] + 5))
+	path_env = envp[i] + 5;
+	if (!envp[i] || !path_env)
 		return (NULL);
-	if (!(paths = ft_split(path_env, ':')))
+	paths = ft_split(path_env, ':');
+	if (!paths)
 		return (NULL);
 	i = 0;
 	while (paths[i])
@@ -39,7 +41,7 @@ char	*get_command_path(char *cmd, char **envp)
 	return (NULL);
 }
 
-int	child_process_one(int fd[2], char *argv[], char *envp[], int infile)
+int	*child_process_one(int fd[2], char *argv[], char *envp[], int infile)
 {
 	pid_t	pid;
 	char	*cmd1_path;
@@ -61,11 +63,11 @@ int	child_process_one(int fd[2], char *argv[], char *envp[], int infile)
 	return (fd);
 }
 
-int	child_process_two(int fd[2], char *argv[], char *envp[], int outfile)
+int	*child_process_two(int fd[2], char *argv[], char *envp[], int outfile)
 {
 	pid_t	pid;
-	char *cmd2_path;
-	char **cmd2_args;
+	char	*cmd2_path;
+	char	**cmd2_args;
 
 	pid = fork();
 	if (pid == 0)
@@ -75,7 +77,7 @@ int	child_process_two(int fd[2], char *argv[], char *envp[], int outfile)
 		close(fd[0]);
 		close(fd[1]);
 		cmd2_path = get_command_path(ft_split(argv[3], ' ')[0], envp);
-		char **cmd2_args = ft_split(argv[3], ' ');
+		cmd2_args = ft_split(argv[3], ' ');
 		execve(cmd2_path, cmd2_args, envp);
 		perror("execve cmd2");
 		exit(1);

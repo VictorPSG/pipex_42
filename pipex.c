@@ -6,7 +6,7 @@
 /*   By: victda-s <victda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 23:10:47 by victda-s          #+#    #+#             */
-/*   Updated: 2025/01/06 20:47:25 by victda-s         ###   ########.fr       */
+/*   Updated: 2025/01/08 14:44:39 by victda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,11 @@ static int	is_valid_input(int argc, char *argv[])
 	}
 	infile = open(argv[1], O_RDONLY);
 	if (infile < 0)
-		return (perror("infile"), 1);
-	return (0);
+	{
+		perror("infile");
+		return (0);
+	}
+	return (infile);
 }
 
 int	main(int argc, char *argv[], char *envp[])
@@ -43,14 +46,17 @@ int	main(int argc, char *argv[], char *envp[])
 	int			outfile;
 	int			infile;
 
-	outfile = create_file(argv);
-	if (is_valid_input(argc, argv) || !outfile)
-	{
-		printf("caiu aqui!\n");
+	infile = is_valid_input(argc, argv);
+	if (!infile)
 		return (0);
-	}
+	outfile = create_file(argv);
+	if(!outfile)
+		return (0);
 	if (pipe(fd) == -1)
 		return (perror("pipe"), 1);
-	printf("caiu aqui!!!");
+	child_process_one(fd, argv, envp, infile);
+	child_process_two(fd, argv, envp, outfile);
+	close(fd[0]);
+    close(fd[1]);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: victda-s <victda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 20:59:43 by victda-s          #+#    #+#             */
-/*   Updated: 2025/01/06 20:48:06 by victda-s         ###   ########.fr       */
+/*   Updated: 2025/01/06 22:24:50 by victda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@
 
 int		child_process(int fd[2], char *argv[], char *envp[]);
 char	*get_command_path(char *cmd, char **envp);
-int		child_process_one(int fd[2], char *argv[], char *envp[], int infile);
-int		child_process_two(int fd[2], char *argv[], char *envp[], int outfile);
+int		*child_process_one(int fd[2], char *argv[], char *envp[], int infile);
+int		*child_process_two(int fd[2], char *argv[], char *envp[], int outfile);
 #endif

@@ -2,11 +2,11 @@ NAME = pipex
 
 LIBDIR = libft
 OBJDIR = obj
-SRC = main.c
+SRC = pipex.c utils.c
 OBJ = $(SRC:%.c=$(OBJDIR)/%.o)
 LIBFT = $(LIBDIR)/libft.a
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g3 -Wall -Wextra -Werror
 
 all: $(LIBFT) $(NAME)
 

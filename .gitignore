@@ -1,6 +1,9 @@
 #Ignorar objetos
 /obj
-
+*.o
+*.a
 pipex
 .vscode
 output
+outfile
+/pipex-tester
